@@ -1,67 +1,25 @@
 #include <iostream>
-#include <cmath>
-
+using namespace std;
 int main()
 {
-    int Mantissa[52] = {}, Exp[11] = {};
-    double number;
-    bool sign;
-    std::cin >> number;
-    sign = number < 0;
-    if (sign) number = -number;
-    int integer_part = (int)number, exp = 0;
-    double fractional_part = number - integer_part;
-    integer_part /= 2;
-    for (int i = 0; i < 52; i++)
+    union
     {
-        if (integer_part < pow(2, i))
+        int A[2];
+        double number = 3.14;
+    };
+    unsigned int order = 32;
+    unsigned int mask = 1 << order - 1;
+    cout << "Enter the fractonal number ";
+    cin >> number;
+    for (int c=1; c>=0; c--)
+    {
+        for (int i=1; i<=order; i++)
         {
-            exp = i;
-            break;
+            putchar(A[c] & mask ? '1' : '0');
+            A[c] <<= 1;
+            if ((i == 1 || i == 12) && c==1) putchar(' ');
         }
     }
-    if (integer_part == 0)
-    {
-        exp = 0;
-        while (fractional_part < 1)
-        {
-            fractional_part = fractional_part*2;
-            exp -= 1;
-        }
-        fractional_part -= 1;
-    for (int c=0; c<52; c++)
-        {
-        Mantissa[c] = (int)(fractional_part*2);
-        fractional_part = fractional_part*2-Mantissa[c];
-        }
-    }
-    else
-    {
-    for (int k = 0; k < 52; k++)
-    {
-        if (integer_part >= pow(2, (exp-1-k)))
-        {
-        Mantissa[k] = 1;
-        integer_part -= pow(2, (exp-1-k));
-        }
-    }
-    for (int c=exp; c<52; c++)
-        {
-        Mantissa[c] = (int)(fractional_part*2);
-        fractional_part = fractional_part*2-Mantissa[c];
-        }
-    }
-    exp += 1023;
-    for (int i=0; i<11; i++)
-    {
-        Exp[10-i] = exp % 2;
-        exp = exp / 2;
-    }
-    std::cout << sign << " ";
-    for (int i=0; i<11; i++)
-        std::cout << Exp[i];
-    std::cout << " ";
-    for (int i=0; i<52; i++)
-        std::cout << Mantissa[i];
+    cout << endl;
     return 0;
 }

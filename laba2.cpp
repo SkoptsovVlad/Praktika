@@ -1,22 +1,18 @@
 #include <iostream>
-#include <cmath>
-
+using namespace std;
 int main()
 {
-    long int A[32] = {}, number;
-    std::cin >> number;
-    if (number < 0) number = pow(2, 32) - abs(number);
-    for (int i=0; i<32; i++)
+    int value;
+    unsigned int order = 32;
+    unsigned int mask = 1 << order - 1;
+    cout << "Enter the integer number ";
+    cin >> value;
+    for (int i=1; i<=order; i++)
     {
-        A[31-i] = number % 2;
-        number = number / 2;
+        putchar(value & mask ? '1' : '0');
+        value <<= 1;
+        if (i % order-1 == 0 || i % 8 == 0) putchar(' ');
     }
-    for (int i=0; i<32; i++)
-    {   
-        if (i%8==7 || i==0)
-            std::cout << A[i] << " ";
-        else 
-            std::cout << A[i];
-    }
+    cout << endl;
     return 0;
 }

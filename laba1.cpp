@@ -2,13 +2,13 @@
 using namespace std;
 int main()
 {
-    cout << sizeof(int) << endl;
-    cout << sizeof(short int) << endl;
-    cout << sizeof(long int) << endl;
-    cout << sizeof(float) << endl;
-    cout << sizeof(double) << endl;
-    cout << sizeof(long double) << endl;
-    cout << sizeof(char) << endl;
-    cout << sizeof(bool) << endl;
+    cout << "int = " << sizeof(int) << endl;
+    cout << "short int = " << sizeof(short int) << endl;
+    cout << "long int = " << sizeof(long int) << endl;
+    cout << "float = " << sizeof(float) << endl;
+    cout << "double = " << sizeof(double) << endl;
+    cout << "long double = " << sizeof(long double) << endl;
+    cout << "char = " << sizeof(char) << endl;
+    cout << "bool = " << sizeof(bool) << endl;
     return 0;
 }
